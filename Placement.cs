@@ -1,15 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Placement : MonoBehaviour
 {
     Camera sideCamera;
     Vector2 firsPosition;
     GameObject[] boxArray;
+
     //Level Control
-    int placedPiece = 1;
-    int totalPiece = 12;
+
+    Finish Finish;
 
 
     private void OnMouseDrag()
@@ -28,6 +30,7 @@ public class Placement : MonoBehaviour
         sideCamera = GameObject.Find("Main Camera").GetComponent<Camera>();
         firsPosition=transform.position;
         boxArray = GameObject.FindGameObjectsWithTag("Box");
+       Finish = GameObject.Find("Finish").GetComponent<Finish>();
       
     }
 
@@ -45,9 +48,10 @@ public class Placement : MonoBehaviour
                         if(mesafe<=1)
                         {
                             transform.position = Box.transform.position;
-                            Number();
+                          
                             this.enabled = false;
                             Destroy(this);
+                            Finish.LevelEnglandFinish();
 
                         }
                         else
@@ -60,13 +64,7 @@ public class Placement : MonoBehaviour
         }
     }
 
-    // Level Control
-    public void Number()
-    {
-        placedPiece++;
-        if (placedPiece == totalPiece)
-        {
-            Debug.Log("Sonraki Bölüme Geç.");
-        }
-    }
+
+  
+
 }
